@@ -1,4 +1,4 @@
-package christmas.menu;
+package christmas.constants.menu;
 
 import java.util.Arrays;
 
