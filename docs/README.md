@@ -116,4 +116,5 @@ public class OutputView {
 - [x] IO 처리
   - [x] InputAdapter 생성
   - [x] OutputAdapter 생성
+- [x] Discount 도메인 생성
 ---
