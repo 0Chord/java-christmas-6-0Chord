@@ -6,7 +6,9 @@ public enum DayConstants {
     FRI(1),
     SAT(2),
     SUN(3),
-    CHRISTMAS(25)
+    CHRISTMAS(25),
+    LAST_DAY(31),
+    FIRST_DAY(1)
     ;
 
     private Integer day;

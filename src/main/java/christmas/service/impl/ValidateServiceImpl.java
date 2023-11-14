@@ -1,11 +1,15 @@
 package christmas.service.impl;
 
+import static christmas.constants.CharConstants.COMMAS;
+import static christmas.constants.DayConstants.FIRST_DAY;
+import static christmas.constants.DayConstants.LAST_DAY;
+
 import christmas.service.ValidateService;
 import java.util.List;
 
 public class ValidateServiceImpl implements ValidateService {
     private long countChar(String str) {
-        return str.chars().filter(c -> c == ',').count();
+        return str.chars().filter(c -> c == COMMAS.getValue()).count();
     }
 
     @Override
@@ -32,10 +36,11 @@ public class ValidateServiceImpl implements ValidateService {
     }
 
     private boolean isEnd(Integer date) {
-        return date > 31;
+
+        return date > LAST_DAY.getDay();
     }
 
     private boolean isStart(Integer date) {
-        return date < 1;
+        return date < FIRST_DAY.getDay();
     }
 }

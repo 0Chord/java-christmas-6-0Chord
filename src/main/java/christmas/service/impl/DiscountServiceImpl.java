@@ -1,7 +1,12 @@
 package christmas.service.impl;
 
-import christmas.constants.menu.Dessert;
-import christmas.constants.menu.Main;
+import static christmas.constants.TypeConstants.CHRISTMAS;
+import static christmas.constants.TypeConstants.DESSERT;
+import static christmas.constants.TypeConstants.MAIN;
+import static christmas.constants.TypeConstants.SPECIAL_DAY;
+import static christmas.constants.TypeConstants.WEEKDAY;
+import static christmas.constants.TypeConstants.WEEKEND;
+
 import christmas.domain.Calendar;
 import christmas.domain.Order;
 import christmas.service.DiscountService;
@@ -13,9 +18,9 @@ public class DiscountServiceImpl implements DiscountService {
         if (calendar.isLessEqualThanChristmasDay()) {
             Integer day = calendar.getDay();
             long amount = calcDiscount(day);
-            return new Discount("christmas", amount);
+            return new Discount(CHRISTMAS.getName(), amount);
         }
-        return new Discount("christmas", 0L);
+        return new Discount(CHRISTMAS.getName(), 0L);
     }
 
     private long calcDiscount(Integer day) {
@@ -30,22 +35,22 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     private Discount weekday(Order order) {
-        Long quantity = order.getCountQuantityFromCategory("디저트");
-        return new Discount("weekday", quantity * 2023);
+        Long quantity = order.getCountQuantityFromCategory(DESSERT.getName());
+        return new Discount(WEEKDAY.getName(), quantity * 2023);
 
     }
 
     private Discount weekend(Order order) {
-        Long quantity = order.getCountQuantityFromCategory("메인메뉴");
-        return new Discount("weekend", quantity * 2023);
+        Long quantity = order.getCountQuantityFromCategory(MAIN.getName());
+        return new Discount(WEEKEND.getName(), quantity * 2023);
     }
 
     @Override
     public Discount specialDay(Calendar calendar) {
         if (calendar.isSpecialDay()) {
-            return new Discount("special", 1000L);
+            return new Discount(SPECIAL_DAY.getName(), 1000L);
         }
-        return new Discount("special", 0L);
+        return new Discount(SPECIAL_DAY.getName(), 0L);
     }
 
 

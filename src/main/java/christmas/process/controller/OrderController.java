@@ -1,5 +1,11 @@
 package christmas.process.controller;
 
+import static christmas.constants.TypeConstants.APPETIZER;
+import static christmas.constants.TypeConstants.BEVERAGE;
+import static christmas.constants.TypeConstants.DASH;
+import static christmas.constants.TypeConstants.DESSERT;
+import static christmas.constants.TypeConstants.MAIN;
+
 import christmas.domain.Food;
 import christmas.domain.Order;
 import christmas.ioadapter.InputAdapter;
@@ -46,16 +52,17 @@ public class OrderController {
         List<String> menus = new ArrayList<>();
         processOrder(food, orders, orderQuantities, menus);
         int beverageCount = (int) menus.stream()
-                .filter(menu -> food.isMatch("탄산음료", menu))
+                .filter(menu -> food.isMatch(BEVERAGE.getName(), menu))
                 .count();
         validateService.checkOnlyBeverage(beverageCount, menus.size());
         return orderQuantities;
     }
 
     private void processOrder(Food food, List<String> orders, List<OrderQuantity> orderQuantities, List<String> menus) {
-        List<String> CATEGORIES = Arrays.asList("에피타이저", "탄산음료", "디저트", "메인메뉴");
+        List<String> CATEGORIES = Arrays.asList(APPETIZER.getName(), BEVERAGE.getName(), DESSERT.getName(),
+                MAIN.getName());
         for (String orderStatus : orders) {
-            MenuState menu = new MenuState(Arrays.asList(orderStatus.split("-")));
+            MenuState menu = new MenuState(Arrays.asList(orderStatus.split(DASH.getName())));
             isSameMenu(menus, menu);
             String category = CATEGORIES.stream()
                     .filter(c -> food.isMatch(c, menu.name()))
