@@ -7,7 +7,6 @@ import christmas.ioadapter.OutputAdapter;
 import christmas.message.ErrorMessage;
 import christmas.service.ConvertService;
 import christmas.service.ValidateService;
-import christmas.validator.Validator;
 import christmas.vo.MenuState;
 import christmas.vo.OrderQuantity;
 import java.util.ArrayList;
@@ -45,12 +44,11 @@ public class OrderController {
     private List<OrderQuantity> getOrderQuantities(Food food, List<String> orders) {
         List<OrderQuantity> orderQuantities = new ArrayList<>();
         List<String> menus = new ArrayList<>();
-        Validator validator = new Validator();
         processOrder(food, orders, orderQuantities, menus);
         int beverageCount = (int) menus.stream()
                 .filter(menu -> food.isMatch("탄산음료", menu))
                 .count();
-        validator.checkOnlyBeverage(beverageCount, menus.size());
+        validateService.checkOnlyBeverage(beverageCount, menus.size());
         return orderQuantities;
     }
 

@@ -24,6 +24,13 @@ public class ValidateServiceImpl implements ValidateService {
         }
     }
 
+    @Override
+    public void checkOnlyBeverage(Integer count, int menus) {
+        if (count.equals(menus)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     private boolean isEnd(Integer date) {
         return date > 31;
     }
