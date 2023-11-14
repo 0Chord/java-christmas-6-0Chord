@@ -7,4 +7,9 @@ public class StandardOutputAdapter implements OutputAdapter {
     public void printMessage(String message) {
         System.out.println(message);
     }
+
+    @Override
+    public void printNewline() {
+        System.out.println();
+    }
 }
