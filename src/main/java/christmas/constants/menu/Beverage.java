@@ -1,9 +1,10 @@
 package christmas.constants.menu;
 
-import java.util.Arrays;
+import christmas.vo.Menu;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum Beverage {
-
     ZERO_COLA("제로콜라", 3000),
     RED_WINE("레드와인", 6000),
     CHAMPAGNE("샴페인", 25000);
@@ -16,8 +17,22 @@ public enum Beverage {
         this.price = price;
     }
 
-    public static boolean isMatch(String name) {
-        return Arrays.stream(Beverage.values())
-                .anyMatch(type -> type.menu.equals(name));
+    public static List<Menu> getMenus() {
+        List<Menu> menus = new ArrayList<>();
+        for (Beverage beverage : Beverage.values()) {
+            String getMenu = beverage.getMenu();
+            Integer price = beverage.getPrice();
+            Menu menu = new Menu(getMenu, price);
+            menus.add(menu);
+        }
+        return menus;
+    }
+
+    private String getMenu() {
+        return menu;
+    }
+
+    private Integer getPrice() {
+        return price;
     }
 }
