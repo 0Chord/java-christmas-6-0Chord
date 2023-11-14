@@ -33,12 +33,8 @@ public class Calendar {
         return day % week == sat;
     }
 
-    public boolean isWeekend() {
-        return isFriday() && isSaturday();
-    }
-
     public boolean isSpecialDay() {
-        return isSunday() && isChristmas();
+        return isSunday() || isChristmas();
     }
 
     private boolean isSunday() {
@@ -50,5 +46,10 @@ public class Calendar {
     private boolean isChristmas() {
         Integer christmas = CHRISTMAS.getDay();
         return day.equals(christmas);
+    }
+
+    public boolean isLessEqualThanChristmasDay() {
+        Integer christmas = CHRISTMAS.getDay();
+        return day <= christmas;
     }
 }
