@@ -1,5 +1,8 @@
 package christmas.process.controller;
 
+import static christmas.constants.NumberConstants.MINIMUM_DISCOUNT_ORDER_PRICE;
+
+import christmas.constants.NumberConstants;
 import christmas.domain.Benefit;
 import christmas.domain.Calendar;
 import christmas.domain.Order;
@@ -22,7 +25,7 @@ public class BenefitController {
 
         discounts = Collections.emptyList();
 
-        if (totalAmount >= 10000) {
+        if (totalAmount >= MINIMUM_DISCOUNT_ORDER_PRICE.getValue()) {
             discounts = Arrays.asList(
                     discountService.date(calendar, order),
                     discountService.christmas(calendar),

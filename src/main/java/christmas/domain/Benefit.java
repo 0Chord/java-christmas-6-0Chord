@@ -9,6 +9,7 @@ import static christmas.constants.TypeConstants.TREE;
 import static christmas.constants.TypeConstants.WEEKDAY;
 import static christmas.constants.TypeConstants.WEEKEND;
 
+import christmas.constants.NumberConstants;
 import christmas.message.SystemMessage;
 import christmas.service.ConvertService;
 import christmas.service.impl.ConvertServiceImpl;
@@ -47,7 +48,7 @@ public class Benefit {
             applyDiscount(details, discount, SPECIAL_DAY.getName(), SystemMessage.SPECIAL_DISCOUNT, convertService);
             applyDiscount(details, discount, CHRISTMAS.getName(), SystemMessage.D_DAY_DISCOUNT, convertService);
         }
-        if (discounts.size() == 0) {
+        if (discounts.size() == NumberConstants.NOTHING.getValue()) {
             details.add(NOTHING.getName());
             return details;
         }
@@ -65,11 +66,11 @@ public class Benefit {
 
     public String badge() {
         long totalBenefitAmount = -calcTotalBenefitAmount();
-        if (totalBenefitAmount >= 20000) {
+        if (totalBenefitAmount >= NumberConstants.SANTA.getValue()) {
             return SANTA.getName();
-        } else if (totalBenefitAmount >= 10000) {
+        } else if (totalBenefitAmount >= NumberConstants.TREE.getValue()) {
             return TREE.getName();
-        } else if (totalBenefitAmount >= 5000) {
+        } else if (totalBenefitAmount >= NumberConstants.STAR.getValue()) {
             return STAR.getName();
         }
 

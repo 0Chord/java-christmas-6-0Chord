@@ -1,5 +1,7 @@
 package christmas.vo;
 
+import static christmas.constants.NumberConstants.ONE;
+
 import java.util.List;
 
 public final class MenuState {
@@ -14,6 +16,6 @@ public final class MenuState {
     }
 
     public Long quantity() {
-        return Long.parseLong(menu.get(1));
+        return Long.parseLong(menu.get(ONE.getValue()));
     }
 }

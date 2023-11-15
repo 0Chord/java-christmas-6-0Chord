@@ -1,5 +1,8 @@
 package christmas.domain;
 
+import static christmas.constants.NumberConstants.NOTHING;
+
+import christmas.constants.NumberConstants;
 import christmas.vo.Category;
 import christmas.vo.Menu;
 import java.util.List;
@@ -24,6 +27,6 @@ public class Food {
                 .filter(menuName -> menu.equals(menuName.getMenu()))
                 .findFirst()
                 .map(Menu::getPrice)
-                .orElse(0);
+                .orElse(NOTHING.getValue());
     }
 }

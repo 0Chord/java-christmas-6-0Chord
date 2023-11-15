@@ -1,6 +1,9 @@
 package christmas.vo;
 
-public final class OrderQuantity{
+import christmas.constants.DiscountConstants;
+import christmas.constants.NumberConstants;
+
+public final class OrderQuantity {
 
     private final String category;
     private final Long quantity;
@@ -16,7 +19,7 @@ public final class OrderQuantity{
     }
 
     private void isNaturalNumber(Long quantity) {
-        if (quantity <= 0) {
+        if (quantity <= NumberConstants.NOTHING.getValue()) {
             throw new IllegalArgumentException();
         }
     }
@@ -37,6 +40,6 @@ public final class OrderQuantity{
         if (category.equals(this.category)) {
             return quantity;
         }
-        return 0L;
+        return DiscountConstants.NOTHING.getValue();
     }
 }

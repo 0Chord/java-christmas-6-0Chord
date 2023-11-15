@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import static christmas.constants.NumberConstants.MAX_ORDER_COUNT;
 import static christmas.constants.TypeConstants.UNIT_OF_ORDERS;
 
 import christmas.vo.OrderQuantity;
@@ -18,7 +19,7 @@ public class Order {
                 .mapToLong(OrderQuantity::getQuantity)
                 .sum();
 
-        if (menuCount > 20) {
+        if (menuCount > MAX_ORDER_COUNT.getValue()) {
             throw new IllegalArgumentException();
         }
     }
