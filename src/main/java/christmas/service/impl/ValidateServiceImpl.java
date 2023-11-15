@@ -3,6 +3,7 @@ package christmas.service.impl;
 import static christmas.constants.CharConstants.COMMAS;
 import static christmas.constants.DayConstants.FIRST_DAY;
 import static christmas.constants.DayConstants.LAST_DAY;
+import static christmas.constants.TypeConstants.BLANK;
 
 import christmas.service.ValidateService;
 import java.util.List;
@@ -21,6 +22,9 @@ public class ValidateServiceImpl implements ValidateService {
 
     @Override
     public void commas(List<String> orders, String input) {
+        if (orders.contains(BLANK.getName())) {
+            throw new IllegalArgumentException();
+        }
         int orderSize = orders.size();
         long commasCount = countChar(input);
         if (orderSize - 1 != commasCount) {

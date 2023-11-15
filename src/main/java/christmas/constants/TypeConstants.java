@@ -16,7 +16,8 @@ public enum TypeConstants {
     SANTA("산타"),
     TREE("트리"),
     STAR("별"),
-    UNIT_OF_ORDERS("%s %s개")
+    UNIT_OF_ORDERS("%s %s개"),
+    BLANK("")
     ;
 
     private final String name;
