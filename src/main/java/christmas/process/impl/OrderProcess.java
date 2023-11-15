@@ -35,23 +35,38 @@ public class OrderProcess implements Process {
     @Override
     public void play() {
         Food food = foodController.make();
-        printController.mainStart();
-        Calendar calendar = calendarController.make();
+        Calendar calendar = makeCalendar();
         printController.select();
+        Order order = makeOrder(food, calendar);
+        printController.totalOrderAmount();
+        Long totalAmount = totalAmountController.totalAmount(order);
+        printDiscount(totalAmount);
+        Benefit benefit = benefitController.make(calendar, order, totalAmount);
+        printDetails(totalAmount, benefit);
+    }
+
+    private Order makeOrder(Food food, Calendar calendar) {
         Order order = orderController.make(food);
         printController.introduction(calendar);
         printController.order(order);
-        printController.totalOrderAmount();
-        Long totalAmount = totalAmountController.totalAmount(order);
+        return order;
+    }
+
+    private Calendar makeCalendar() {
+        printController.mainStart();
+        return calendarController.make();
+    }
+
+    private void printDiscount(Long totalAmount) {
         printController.totalAmount(totalAmount);
         printController.giveaway(totalAmount);
         printController.benefitDetails();
-        Benefit benefit = benefitController.make(calendar, order, totalAmount);
-        printController.details(benefit);
-        printController.totalBenefit(benefit);
-        printController.discountAmount(benefit,totalAmount);
-        printController.badge(benefit);
     }
 
-
+    private void printDetails(Long totalAmount, Benefit benefit) {
+        printController.details(benefit);
+        printController.totalBenefit(benefit);
+        printController.discountAmount(benefit, totalAmount);
+        printController.badge(benefit);
+    }
 }

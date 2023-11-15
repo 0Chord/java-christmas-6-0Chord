@@ -5,7 +5,7 @@ import christmas.vo.Menu;
 import java.util.List;
 
 public class Food {
-    private List<Category> categories;
+    private final List<Category> categories;
 
     public Food(List<Category> categories) {
         this.categories = categories;

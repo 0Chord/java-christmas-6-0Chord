@@ -9,6 +9,4 @@ public class Application {
         Process process = appConfig.process();
         process.play();
     }
-
-
 }
