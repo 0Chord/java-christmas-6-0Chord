@@ -5,7 +5,6 @@ import static christmas.constants.TypeConstants.BEVERAGE;
 import static christmas.constants.TypeConstants.DESSERT;
 import static christmas.constants.TypeConstants.MAIN;
 
-import christmas.constants.TypeConstants;
 import christmas.constants.menu.Appetizer;
 import christmas.constants.menu.Beverage;
 import christmas.constants.menu.Dessert;

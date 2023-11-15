@@ -12,6 +12,11 @@ public enum TypeConstants {
     DASH("-"),
     COMMAS(","),
     UNIT_OF_MONEY("###,###원"),
+    NOTHING("없음"),
+    SANTA("산타"),
+    TREE("트리"),
+    STAR("별"),
+    UNIT_OF_ORDERS("%s %s개")
     ;
 
     private final String name;

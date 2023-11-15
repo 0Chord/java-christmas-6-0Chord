@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.constants.TypeConstants.UNIT_OF_ORDERS;
+
 import christmas.vo.OrderQuantity;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Order {
 
     public List<String> getOrderStatus() {
         return orders.stream()
-                .map(order -> String.format("%s %s개", order.getName(), order.getQuantity()))
+                .map(order -> String.format(UNIT_OF_ORDERS.getName(), order.getName(), order.getQuantity()))
                 .toList();
     }
 

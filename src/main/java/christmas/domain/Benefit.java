@@ -1,6 +1,16 @@
 package christmas.domain;
 
+import static christmas.constants.TypeConstants.CHRISTMAS;
+import static christmas.constants.TypeConstants.NOTHING;
+import static christmas.constants.TypeConstants.SANTA;
+import static christmas.constants.TypeConstants.SPECIAL_DAY;
+import static christmas.constants.TypeConstants.STAR;
+import static christmas.constants.TypeConstants.TREE;
+import static christmas.constants.TypeConstants.WEEKDAY;
+import static christmas.constants.TypeConstants.WEEKEND;
+
 import christmas.message.SystemMessage;
+import christmas.service.ConvertService;
 import christmas.service.impl.ConvertServiceImpl;
 import christmas.vo.Discount;
 import christmas.vo.Giveaway;
@@ -32,41 +42,37 @@ public class Benefit {
         ConvertServiceImpl convertService = new ConvertServiceImpl();
         List<String> details = new ArrayList<>();
         for (Discount discount : discounts) {
-            if (discount.isCategory("weekday")) {
-                details.add(SystemMessage.WEEKDAY_DISCOUNT.getMessage() + convertService.longToString(
-                        -discount.getAmount()));
-            }
-            if (discount.isCategory("weekend")) {
-                details.add(SystemMessage.WEEKEND_DISCOUNT.getMessage() + convertService.longToString(
-                        -discount.getAmount()));
-            }
-            if (discount.isCategory("special")) {
-                details.add(SystemMessage.SPECIAL_DISCOUNT.getMessage() + convertService.longToString(
-                        -discount.getAmount()));
-            }
-            if (discount.isCategory("christmas")) {
-                details.add(SystemMessage.D_DAY_DISCOUNT.getMessage() + convertService.longToString(
-                        -discount.getAmount()));
-            }
+            applyDiscount(details, discount, WEEKDAY.getName(), SystemMessage.WEEKDAY_DISCOUNT, convertService);
+            applyDiscount(details, discount, WEEKEND.getName(), SystemMessage.WEEKEND_DISCOUNT, convertService);
+            applyDiscount(details, discount, SPECIAL_DAY.getName(), SystemMessage.SPECIAL_DISCOUNT, convertService);
+            applyDiscount(details, discount, CHRISTMAS.getName(), SystemMessage.D_DAY_DISCOUNT, convertService);
         }
         if (discounts.size() == 0) {
-            details.add("없음");
+            details.add(NOTHING.getName());
             return details;
         }
         details.add(SystemMessage.EVENT.getMessage() + convertService.longToString(-giveaway.getPrice()));
         return details;
     }
 
+    private void applyDiscount(List<String> details, Discount discount, String category, SystemMessage message,
+                               ConvertService convertService) {
+
+        if (discount.isCategory(category)) {
+            details.add(message.getMessage() + convertService.longToString(-discount.getAmount()));
+        }
+    }
+
     public String badge() {
         long totalBenefitAmount = -calcTotalBenefitAmount();
         if (totalBenefitAmount >= 20000) {
-            return "산타";
+            return SANTA.getName();
         } else if (totalBenefitAmount >= 10000) {
-            return "트리";
+            return TREE.getName();
         } else if (totalBenefitAmount >= 5000) {
-            return "별";
+            return STAR.getName();
         }
 
-        return "없음";
+        return NOTHING.getName();
     }
 }
