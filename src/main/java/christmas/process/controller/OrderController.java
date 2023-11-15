@@ -47,7 +47,7 @@ public class OrderController {
         }
     }
 
-    private List<OrderQuantity> getOrderQuantities(Food food, List<String> orders) {
+    public List<OrderQuantity> getOrderQuantities(Food food, List<String> orders) {
         List<OrderQuantity> orderQuantities = new ArrayList<>();
         List<String> menus = new ArrayList<>();
         processOrder(food, orders, orderQuantities, menus);
